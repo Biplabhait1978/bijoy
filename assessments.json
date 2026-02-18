@@ -1,0 +1,56 @@
+[
+  {
+    "timestamp": "2026-02-18T12:29:08.695Z",
+    "clientName": "bm",
+    "address": "se",
+    "mobile": "54654656",
+    "total": 7,
+    "risk": "Moderate Risk",
+    "ratio": "80.0",
+    "ratioLevel": "High Risk, Immediate Planning Required",
+    "advisorName": "bm",
+    "advisorMobile": "123",
+    "answers": [
+      {
+        "question": "Q1",
+        "answer": "Yes"
+      },
+      {
+        "question": "Q2",
+        "answer": "No"
+      },
+      {
+        "question": "Q3",
+        "answer": "Yes"
+      },
+      {
+        "question": "Q4",
+        "answer": "Yes"
+      },
+      {
+        "question": "Q5",
+        "answer": "No"
+      },
+      {
+        "question": "Q6",
+        "answer": "No"
+      },
+      {
+        "question": "Q7",
+        "answer": "Yes"
+      },
+      {
+        "question": "Q8",
+        "answer": "Yes"
+      },
+      {
+        "question": "Q9",
+        "answer": "Yes"
+      },
+      {
+        "question": "Q10",
+        "answer": "Yes"
+      }
+    ]
+  }
+]
