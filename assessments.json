@@ -106,5 +106,59 @@
         "answer": "Yes"
       }
     ]
+  },
+  {
+    "timestamp": "2026-02-18T12:33:00.264Z",
+    "clientName": "bm1",
+    "address": "se1",
+    "mobile": "546546561",
+    "total": 0,
+    "risk": "High Risk",
+    "ratio": "70.0",
+    "ratioLevel": "High Risk, Immediate Planning Required",
+    "advisorName": "bm",
+    "advisorMobile": "123",
+    "answers": [
+      {
+        "question": "Q1",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q2",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q3",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q4",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q5",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q6",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q7",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q8",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q9",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q10",
+        "answer": "Not selected"
+      }
+    ]
   }
 ]
