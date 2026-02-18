@@ -1,0 +1,56 @@
+[
+  {
+    "timestamp": "2026-02-18T17:08:02.377Z",
+    "clientName": "(not provided)",
+    "address": "(not provided)",
+    "mobile": "(not provided)",
+    "total": 0,
+    "risk": "High Risk",
+    "ratio": "0.0",
+    "ratioLevel": "Excellent Financial Position",
+    "advisorName": "(not provided)",
+    "advisorMobile": "(not provided)",
+    "answers": [
+      {
+        "question": "Q1",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q2",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q3",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q4",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q5",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q6",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q7",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q8",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q9",
+        "answer": "Not selected"
+      },
+      {
+        "question": "Q10",
+        "answer": "Not selected"
+      }
+    ]
+  }
+]
