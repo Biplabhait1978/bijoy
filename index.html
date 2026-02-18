@@ -4,255 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
   <title>Bijoy Mazumder · Mohor Financial Fitness</title>
-  <!-- PDF Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <!-- SheetJS (XLSX) for Excel export -->
+  <!-- SheetJS for Excel -->
   <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-      background: #f0f4fa;
-      padding: 12px 12px 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .app-container {
-      max-width: 560px;
-      width: 100%;
-    }
-
-    .company-header {
-      text-align: center;
-      margin: 5px 0 10px;
-    }
-    .company-name {
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: #063970;
-      line-height: 1.2;
-      letter-spacing: -0.3px;
-      background: linear-gradient(145deg, #ffffff, #e6edf6);
-      padding: 16px 12px;
-      border-radius: 50px;
-      box-shadow: 0 6px 12px rgba(0,40,70,0.08);
-      border: 1px solid rgba(46, 91, 136, 0.2);
-    }
-
-    h2 {
-      font-size: 1.7rem;
-      font-weight: 600;
-      text-align: center;
-      margin: 0.5rem 0 0.8rem;
-      color: #0a2f4d;
-    }
-
-    .section {
-      background: white;
-      padding: 20px 18px;
-      border-radius: 30px;
-      margin-bottom: 20px;
-      box-shadow: 0 6px 18px rgba(0, 30, 60, 0.05);
-      border: 1px solid #d2e2f2;
-    }
-
-    .section h3 {
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 18px;
-      color: #113355;
-      border-left: 6px solid #2b6c9e;
-      padding-left: 16px;
-    }
-
-    label {
-      font-weight: 500;
-      font-size: 1rem;
-      color: #1e3a5f;
-      display: block;
-      margin-bottom: 4px;
-      margin-top: 14px;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 16px 18px;
-      font-size: 1.1rem;
-      border: 1.5px solid #d9e2ef;
-      border-radius: 26px;
-      background: #fafcff;
-      margin-bottom: 6px;
-      appearance: none;
-      font-family: inherit;
-    }
-
-    select {
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="%23333" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>');
-      background-repeat: no-repeat;
-      background-position: right 18px center;
-      background-size: 18px;
-    }
-
-    .calc-btn-container {
-      margin: 10px 0 30px;
-    }
-    .primary-btn {
-      background: #1d4d7c;
-      color: white;
-      border: none;
-      padding: 20px 16px;
-      font-size: 1.5rem;
-      font-weight: 700;
-      border-radius: 60px;
-      width: 100%;
-      box-shadow: 0 8px 0 #0b2a44, 0 8px 24px rgba(0,60,120,0.3);
-      transition: 0.05s linear;
-      letter-spacing: 0.5px;
-      touch-action: manipulation;
-      cursor: pointer;
-    }
-    .primary-btn:active {
-      transform: translateY(6px);
-      box-shadow: 0 2px 0 #0b2a44, 0 10px 20px rgba(0,60,120,0.2);
-    }
-
-    .action-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
-      justify-content: center;
-    }
-    .action-btn {
-      flex: 1 1 160px;
-      background: white;
-      border: 2px solid #1d4d7c;
-      color: #1d4d7c;
-      font-size: 1.2rem;
-      font-weight: 600;
-      padding: 14px 8px;
-      border-radius: 50px;
-      background: #f0f7ff;
-      cursor: pointer;
-    }
-    .action-btn:active {
-      background: #d6e8ff;
-    }
-
-    .result, .history {
-      background: #ffffff;
-      border-radius: 32px;
-      padding: 24px 18px;
-      margin: 15px 0 20px;
-      border: 1px solid #c4d8f0;
-    }
-    .result p {
-      font-size: 1.1rem;
-      padding: 6px 0;
-      border-bottom: 1px dashed #c0d3e8;
-    }
-    .result hr {
-      margin: 16px 0;
-      border: 1px solid #d6e5f5;
-    }
-
-    .interpret-box {
-      background: #e5effb;
-      border-radius: 24px;
-      padding: 16px;
-      margin: 15px 0;
-    }
-    .interpret-box table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .interpret-box td {
-      padding: 6px 8px;
-      border-bottom: 1px solid #b0c8dd;
-    }
-
-    .answer-list {
-      margin: 15px 0;
-    }
-    .answer-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid #e2ecf9;
-    }
-
-    .history-item {
-      background: #f8fbfe;
-      border-radius: 24px;
-      padding: 16px;
-      margin-bottom: 16px;
-      border: 1px solid #bfd9f0;
-    }
-    .history-item p {
-      margin: 6px 0;
-    }
-    .history-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      background: #eef3f9;
-      padding: 10px 16px;
-      border-radius: 30px;
-      margin-bottom: 10px;
-    }
-    .history-header strong {
-      color: #0a2f4d;
-    }
-    .history-detail {
-      display: none;
-      padding: 10px 0;
-    }
-    .history-item.expanded .history-detail {
-      display: block;
-    }
-
-    .clear-btn {
-      background: #b13e2d;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 40px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin: 10px 0;
-      box-shadow: 0 4px 0 #6b2a1e;
-    }
-    .clear-btn:active {
-      transform: translateY(4px);
-      box-shadow: 0 1px 0 #6b2a1e;
-    }
-
-    @media print {
-      .calc-btn-container, .action-row, .clear-btn, .history .section {
-        display: none !important;
-      }
-      body { background: white; }
-      .section { box-shadow: none; border: 1px solid #aaa; }
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Roboto, system-ui, sans-serif; background: #f0f4fa; padding: 12px 12px 30px; display: flex; flex-direction: column; align-items: center; }
+    .app-container { max-width: 600px; width: 100%; }
+    .company-header { text-align: center; margin: 5px 0 10px; }
+    .company-name { font-size: 1.7rem; font-weight: 700; color: #063970; background: linear-gradient(145deg, #ffffff, #e6edf6); padding: 16px 12px; border-radius: 50px; box-shadow: 0 6px 12px rgba(0,40,70,0.08); border: 1px solid rgba(46,91,136,0.2); }
+    h2 { font-size: 1.7rem; font-weight: 600; text-align: center; margin: 0.5rem 0 0.8rem; color: #0a2f4d; }
+    .section { background: white; padding: 20px 18px; border-radius: 30px; margin-bottom: 20px; box-shadow: 0 6px 18px rgba(0,30,60,0.05); border: 1px solid #d2e2f2; }
+    .section h3 { font-size: 1.4rem; font-weight: 600; margin-bottom: 18px; color: #113355; border-left: 6px solid #2b6c9e; padding-left: 16px; }
+    label { font-weight: 500; font-size: 1rem; color: #1e3a5f; display: block; margin-bottom: 4px; margin-top: 14px; }
+    input, select { width: 100%; padding: 16px 18px; font-size: 1.1rem; border: 1.5px solid #d9e2ef; border-radius: 26px; background: #fafcff; margin-bottom: 6px; appearance: none; font-family: inherit; }
+    select { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="%23333" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>'); background-repeat: no-repeat; background-position: right 18px center; background-size: 18px; }
+    .calc-btn-container { margin: 10px 0 30px; }
+    .primary-btn { background: #1d4d7c; color: white; border: none; padding: 20px 16px; font-size: 1.5rem; font-weight: 700; border-radius: 60px; width: 100%; box-shadow: 0 8px 0 #0b2a44, 0 8px 24px rgba(0,60,120,0.3); transition: 0.05s linear; cursor: pointer; }
+    .primary-btn:active { transform: translateY(6px); box-shadow: 0 2px 0 #0b2a44, 0 10px 20px rgba(0,60,120,0.2); }
+    .action-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; justify-content: center; }
+    .action-btn { flex: 1 1 200px; background: white; border: 2px solid #1d4d7c; color: #1d4d7c; font-size: 1.2rem; font-weight: 600; padding: 14px 8px; border-radius: 50px; background: #f0f7ff; cursor: pointer; }
+    .action-btn:active { background: #d6e8ff; }
+    .result { background: #ffffff; border-radius: 32px; padding: 24px 18px; margin: 15px 0 20px; border: 1px solid #c4d8f0; }
+    .result p { font-size: 1.1rem; padding: 6px 0; border-bottom: 1px dashed #c0d3e8; }
+    .result hr { margin: 16px 0; border: 1px solid #d6e5f5; }
+    .interpret-box { background: #e5effb; border-radius: 24px; padding: 16px; margin: 15px 0; }
+    .interpret-box table { width: 100%; border-collapse: collapse; }
+    .interpret-box td { padding: 6px 8px; border-bottom: 1px solid #b0c8dd; }
+    .answer-list { margin: 15px 0; }
+    .answer-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e2ecf9; }
+    .status { margin-top: 10px; font-size: 0.9rem; color: #2b4f6e; text-align: center; }
+    /* লুকানো গিটহাব সেটিংস */
+    .hidden-settings { display: none; }
   </style>
 </head>
 <body>
 <div class="app-container">
-  <!-- কোম্পানির নাম (আপনার দেওয়া অনুযায়ী) -->
   <div class="company-header">
     <div class="company-name">Bijoy Mazumder . Mohor Savings & Insurance Services</div>
   </div>
-
   <h2>Financial Fitness Assessment</h2>
+
+  <!-- গিটহাব সেটিংস - সম্পূর্ণ লুকানো, কিন্তু মান আগে থেকে সেট করা -->
+  <div class="hidden-settings">
+    <input type="text" id="repoOwner" value="biplabhait1978"> <!-- আপনার GitHub ইউজারনেম দিন -->
+    <input type="text" id="repoName" value="bijoy"> <!-- আপনার রিপোজিটরির নাম দিন -->
+    <input type="text" id="jsonPath" value="assessments.json"> <!-- JSON ফাইলের পাথ -->
+    <input type="password" id="githubToken" value="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"> <!-- আপনার টোকেন দিন -->
+  </div>
 
   <div id="reportArea">
     <!-- ক্লায়েন্ট তথ্য -->
@@ -260,10 +58,8 @@
       <h3>Client Information</h3>
       <label>Client Name</label>
       <input type="text" id="clientName" placeholder="Full name">
-
       <label>Address</label>
       <input type="text" id="clientAddress" placeholder="City / street">
-
       <label>Mobile Number</label>
       <input type="tel" id="clientMobile" placeholder="+91 98765 43210">
     </div>
@@ -274,15 +70,13 @@
       <div id="questions"></div>
     </div>
 
-    <!-- খরচ ও আয়ের অনুপাত -->
+    <!-- খরচ ও আয় -->
     <div class="section">
       <h3>Expenditure / Income Ratio</h3>
       <label>Monthly Family Expenditure (₹)</label>
       <input type="number" id="monthlyExp" placeholder="e.g. 25000" min="0" step="1000">
-
       <label>Monthly Family Income (₹)</label>
       <input type="number" id="monthlyInc" placeholder="e.g. 50000" min="0" step="1000">
-
       <p style="font-size:1rem; margin-top:8px; color:#2b4f6e;">Expenditure ÷ Income × 100 = %</p>
     </div>
 
@@ -291,37 +85,30 @@
       <h3>Advisor Details</h3>
       <label>Advisor Name</label>
       <input type="text" id="advisorName" placeholder="Your name">
-
       <label>Advisor Mobile</label>
       <input type="tel" id="advisorMobile" placeholder="+91 98765 43210">
     </div>
 
-    <!-- ক্যালকুলেট বাটন (স্টোর করে) -->
+    <!-- ক্যালকুলেট বাটন -->
     <div class="calc-btn-container">
-      <button class="primary-btn" onclick="calculateAndStore()">📊 Calculate Score & Save</button>
+      <button class="primary-btn" onclick="calculateAndSaveToGitHub()">📊 Calculate Score & Save</button>
     </div>
 
-    <!-- বর্তমান রেজাল্ট দেখাবে -->
+    <!-- রেজাল্ট দেখানোর জায়গা -->
     <div class="result" id="result"></div>
-  </div> <!-- reportArea শেষ -->
 
-  <!-- পূর্বের অ্যাসেসমেন্টের ইতিহাস -->
-  <div class="history" id="historySection">
-    <h3 style="color:#113355; margin-bottom:16px;">📜 Previous Assessments</h3>
-    <div id="historyList"></div>
-    <button class="clear-btn" onclick="clearHistory()">🗑 Clear All History</button>
+    <!-- স্ট্যাটাস মেসেজ -->
+    <div id="githubStatus" class="status"></div>
   </div>
 
-  <!-- PDF, Print ও Excel বাটন -->
+  <!-- Excel ডাউনলোড বাটন (শুধু এটি থাকবে, PDF নেই) -->
   <div class="action-row">
-    <button class="action-btn" onclick="downloadPDF()">📄 Export PDF</button>
-    <button class="action-btn" onclick="window.print()">🖨 Print Report</button>
-    <button class="action-btn" onclick="exportToExcel()">📥 Excel এ ডাউনলোড করুন</button>
+    <button class="action-btn" onclick="exportFromGitHubToExcel()">📥 Download Excel </button>
   </div>
 </div>
 
 <script>
-  // ----- ইংরেজি প্রশ্ন -----
+  // ----- ইংরেজি প্রশ্ন (পিডিএফ অনুযায়ী) -----
   const questions = [
     "Do you have life insurance equal to 10 times your annual income?",
     "Do you know how much money you will need monthly after retirement?",
@@ -335,7 +122,7 @@
     "Do you have a written financial plan with a professional advisor?"
   ];
 
-  // ----- প্রশ্নগুলো রেন্ডার করা -----
+  // প্রশ্নগুলো রেন্ডার
   const container = document.getElementById("questions");
   questions.forEach((q, index) => {
     container.innerHTML += `
@@ -348,71 +135,83 @@
     `;
   });
 
-  // ----- লোকাল স্টোরেজের কী -----
-  const STORAGE_KEY = 'mohor_assessments';
+  // GitHub-এ JSON ফাইল আপডেট করার ফাংশন
+  async function saveToGitHub(data) {
+    const token = document.getElementById('githubToken').value.trim();
+    const owner = document.getElementById('repoOwner').value.trim();
+    const repo = document.getElementById('repoName').value.trim();
+    const path = document.getElementById('jsonPath').value.trim();
 
-  // ----- ইতিহাস লোড করে দেখানো -----
-  function loadHistory() {
-    const history = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-    const historyList = document.getElementById('historyList');
-    historyList.innerHTML = '';
-    if (history.length === 0) {
-      historyList.innerHTML = '<p style="text-align:center; color:#777;">No previous assessments found.</p>';
-      return;
+    if (!token || !owner || !repo || !path) {
+      alert('GitHub সেটিংস সঠিকভাবে দেওয়া হয়নি।');
+      return false;
     }
-    // সবচেয়ে নতুনটা উপরে দেখাতে reverse
-    history.slice().reverse().forEach((entry, idx) => {
-      const itemDiv = document.createElement('div');
-      itemDiv.className = 'history-item';
-      itemDiv.setAttribute('data-index', idx);
 
-      // হেডার (ক্লিক করলে বিস্তারিত দেখাবে)
-      const header = document.createElement('div');
-      header.className = 'history-header';
-      header.innerHTML = `<strong>${entry.clientName || 'Unnamed'}</strong> <span>Score: ${entry.total}/10 | Risk: ${entry.risk}</span>`;
-      
-      // বিস্তারিত অংশ (প্রথমে লুকানো)
-      const detail = document.createElement('div');
-      detail.className = 'history-detail';
-      detail.innerHTML = `
-        <p><strong>Address:</strong> ${entry.address || ''}</p>
-        <p><strong>Mobile:</strong> ${entry.mobile || ''}</p>
-        <p><strong>Exp/Inc Ratio:</strong> ${entry.ratio}% (${entry.ratioLevel})</p>
-        <p><strong>Advisor:</strong> ${entry.advisorName || ''} (${entry.advisorMobile || ''})</p>
-        <p><strong>Answers:</strong> ${entry.answers ? entry.answers.map(a => a.answer).join(', ') : ''}</p>
-        <p><small>${new Date(entry.timestamp).toLocaleString()}</small></p>
-      `;
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+    const statusDiv = document.getElementById('githubStatus');
+    statusDiv.innerText = 'GitHub-এ সংরক্ষণ করা হচ্ছে...';
 
-      itemDiv.appendChild(header);
-      itemDiv.appendChild(detail);
-      
-      header.addEventListener('click', () => {
-        itemDiv.classList.toggle('expanded');
+    try {
+      // প্রথমে ফাইলের existing content (SHA সহ) পাওয়ার চেষ্টা
+      let sha = null;
+      let existingData = [];
+      const getResponse = await fetch(apiUrl, {
+        headers: { 'Authorization': `token ${token}` }
       });
 
-      historyList.appendChild(itemDiv);
-    });
-  }
+      if (getResponse.status === 200) {
+        const fileInfo = await getResponse.json();
+        sha = fileInfo.sha;
+        // content base64 ডিকোড
+        const content = atob(fileInfo.content);
+        existingData = JSON.parse(content);
+      } else if (getResponse.status === 404) {
+        // ফাইল নেই, নতুন তৈরি হবে
+        existingData = [];
+      } else {
+        const err = await getResponse.json();
+        throw new Error(err.message || 'GitHub থেকে ডাটা পাওয়া যায়নি');
+      }
 
-  // ----- ডাটা স্টোর করা -----
-  function saveAssessment(data) {
-    const history = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-    history.push(data);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
-    loadHistory(); // ইতিহাস আপডেট
-  }
+      // নতুন ডাটা অ্যারেতে যোগ
+      existingData.push(data);
 
-  // ----- সব ইতিহাস মুছে ফেলা -----
-  function clearHistory() {
-    if (confirm('Are you sure you want to delete all saved assessments?')) {
-      localStorage.removeItem(STORAGE_KEY);
-      loadHistory();
+      // JSON আপডেট
+      const updatedContent = btoa(JSON.stringify(existingData, null, 2));
+
+      const putBody = {
+        message: `Add assessment from ${data.clientName} on ${new Date().toLocaleString()}`,
+        content: updatedContent,
+        branch: 'main'
+      };
+      if (sha) putBody.sha = sha;
+
+      const putResponse = await fetch(apiUrl, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `token ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(putBody)
+      });
+
+      if (putResponse.ok) {
+        statusDiv.innerText = '✅ GitHub-এ সফলভাবে সংরক্ষিত!';
+        return true;
+      } else {
+        const err = await putResponse.json();
+        throw new Error(err.message);
+      }
+    } catch (error) {
+      statusDiv.innerText = '❌ ত্রুটি: ' + error.message;
+      console.error(error);
+      return false;
     }
   }
 
-  // ----- ক্যালকুলেট ও স্টোর করার মূল ফাংশন -----
-  function calculateAndStore() {
-    // উত্তর সংগ্রহ
+  // ক্যালকুলেট ও GitHub-এ সেভ
+  async function calculateAndSaveToGitHub() {
+    // প্রথমে রেজাল্ট ক্যালকুলেট করে ডাটা তৈরি
     let answers = [];
     let total = 0;
     for (let i = 0; i < questions.length; i++) {
@@ -422,46 +221,39 @@
       if (val === "1") { answerText = "Yes"; total += 1; }
       else if (val === "0") { answerText = "No"; }
       else { answerText = "Not selected"; }
-      let qText = document.getElementById(`qlabel${i}`).innerText;
-      answers.push({ question: qText, answer: answerText });
+      answers.push({ question: `Q${i+1}`, answer: answerText });
     }
 
-    // খরচ ও আয়ের অনুপাত
     let exp = parseFloat(document.getElementById("monthlyExp").value) || 0;
     let inc = parseFloat(document.getElementById("monthlyInc").value) || 0;
     let ratio = (inc > 0) ? (exp / inc) * 100 : 0;
     let ratioFixed = ratio.toFixed(1);
 
-    // অনুপাতের ব্যাখ্যা
     let ratioLevel = "";
     if (ratio <= 45) ratioLevel = "Excellent Financial Position";
     else if (ratio <= 50) ratioLevel = "Good, Minor Improvement Needed";
     else if (ratio <= 65) ratioLevel = "Moderate Risk, Strategic Correction Needed";
     else ratioLevel = "High Risk, Immediate Planning Required";
 
-    // ক্লায়েন্টের তথ্য
     const clientNameField = document.getElementById("clientName").value || "(not provided)";
     const clientAddrField = document.getElementById("clientAddress").value || "(not provided)";
     const clientMobileField = document.getElementById("clientMobile").value || "(not provided)";
-
-    // উপদেষ্টার তথ্য
     const advisorNameField = document.getElementById("advisorName").value || "(not provided)";
     const advisorMobileField = document.getElementById("advisorMobile").value || "(not provided)";
 
-    // রিস্ক লেভেল (স্কোর অনুযায়ী)
     let risk = "";
     if (total >= 8) risk = "Low Risk";
     else if (total >= 5) risk = "Moderate Risk";
     else risk = "High Risk";
 
-    // বর্তমান রেজাল্ট দেখানোর HTML
+    // রেজাল্ট HTML দেখানো
     let answersHtml = '<div class="answer-list"><h4>📋 Detailed Answers</h4>';
-    answers.forEach((item) => {
-      answersHtml += `<div class="answer-item"><span>${item.question}</span> <strong>${item.answer}</strong></div>`;
-    });
+    for (let i = 0; i < questions.length; i++) {
+      let qText = document.getElementById(`qlabel${i}`).innerText;
+      answersHtml += `<div class="answer-item"><span>${qText}</span> <strong>${answers[i].answer}</strong></div>`;
+    }
     answersHtml += '</div>';
-
-    let html = `
+    document.getElementById("result").innerHTML = `
       <h3 style="color:#063970;">👤 ${clientNameField}</h3>
       <p>📍 ${clientAddrField}</p>
       <p>📞 ${clientMobileField}</p>
@@ -472,12 +264,6 @@
         <p style="font-size:1.3rem; font-weight:600;">📊 Expenditure/Income Ratio</p>
         <p>Expenditure: ₹${exp.toFixed(0)} | Income: ₹${inc.toFixed(0)}</p>
         <p style="font-size:1.5rem;">${ratioFixed}%</p>
-        <table>
-          <tr><td>≤ 45%</td><td>Excellent Financial Position</td></tr>
-          <tr><td>45–50%</td><td>Good, Minor Improvement Needed</td></tr>
-          <tr><td>50–65%</td><td>Moderate Risk, Strategic Correction Needed</td></tr>
-          <tr><td>> 65%</td><td>High Risk, Immediate Planning Required</td></tr>
-        </table>
         <p><strong>Interpretation: ${ratioLevel}</strong></p>
       </div>
       <hr>
@@ -485,9 +271,7 @@
       <p><b>Advisor Mobile:</b> ${advisorMobileField}</p>
     `;
 
-    document.getElementById("result").innerHTML = html;
-
-    // স্টোর করার জন্য ডাটা প্রস্তুত
+    // GitHub-এ সংরক্ষণের জন্য ডাটা প্রস্তুত
     const assessmentData = {
       timestamp: new Date().toISOString(),
       clientName: clientNameField,
@@ -499,54 +283,76 @@
       ratioLevel: ratioLevel,
       advisorName: advisorNameField,
       advisorMobile: advisorMobileField,
-      answers: answers.map(a => ({ answer: a.answer })) // শুধু উত্তর রাখা হলো
+      answers: answers
     };
 
-    saveAssessment(assessmentData);
+    await saveToGitHub(assessmentData);
   }
 
-  // ----- Excel এ ডাউনলোড করার ফাংশন (সমস্ত ডাটা একসাথে) -----
-  function exportToExcel() {
-    const history = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  // GitHub থেকে JSON ডাটা নিয়ে Excel বানানো
+  async function exportFromGitHubToExcel() {
+    const token = document.getElementById('githubToken').value.trim();
+    const owner = document.getElementById('repoOwner').value.trim();
+    const repo = document.getElementById('repoName').value.trim();
+    const path = document.getElementById('jsonPath').value.trim();
 
-    if (history.length === 0) {
-      alert("কোনো ডাটা নেই। প্রথমে কিছু অ্যাসেসমেন্ট ক্যালকুলেট করুন।");
+    if (!token || !owner || !repo || !path) {
+      alert('GitHub সেটিংস সঠিকভাবে দেওয়া হয়নি।');
       return;
     }
 
-    // Excel-এর জন্য ডাটা ফরম্যাট
-    const dataForExcel = history.map(entry => ({
-      'তারিখ': new Date(entry.timestamp).toLocaleDateString('bn-BD'),
-      'ক্লায়েন্টের নাম': entry.clientName,
-      'মোবাইল': entry.mobile,
-      'স্কোর': `${entry.total}/10`,
-      'রিস্ক লেভেল': entry.risk,
-      'খরচ-আয় অনুপাত (%)': entry.ratio,
-      'অ্যাডভাইজার': entry.advisorName,
-      'অ্যাডভাইজার মোবাইল': entry.advisorMobile
-    }));
+    const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
+    const statusDiv = document.getElementById('githubStatus');
+    statusDiv.innerText = 'GitHub থেকে ডাটা আনা হচ্ছে...';
 
-    // SheetJS দিয়ে Excel বানানো
-    const worksheet = XLSX.utils.json_to_sheet(dataForExcel);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'All Assessments');
-    XLSX.writeFile(workbook, 'Financial_History.xlsx');
+    try {
+      const response = await fetch(apiUrl, {
+        headers: { 'Authorization': `token ${token}` }
+      });
+
+      if (response.status === 404) {
+        alert('GitHub-এ এখনো কোনো ডাটা নেই। প্রথমে কিছু এন্ট্রি সংরক্ষণ করুন।');
+        statusDiv.innerText = '❌ ফাইল পাওয়া যায়নি';
+        return;
+      }
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.message);
+      }
+
+      const fileInfo = await response.json();
+      const content = atob(fileInfo.content);
+      const assessments = JSON.parse(content);
+
+      if (!assessments || assessments.length === 0) {
+        alert('কোনো ডাটা নেই।');
+        statusDiv.innerText = '⚠️ ডাটা খালি';
+        return;
+      }
+
+      // Excel-এর জন্য ডাটা ফরম্যাট
+      const dataForExcel = assessments.map(entry => ({
+        'তারিখ': new Date(entry.timestamp).toLocaleDateString('bn-BD'),
+        'ক্লায়েন্টের নাম': entry.clientName,
+        'মোবাইল': entry.mobile,
+        'স্কোর': `${entry.total}/10`,
+        'রিস্ক লেভেল': entry.risk,
+        'খরচ-আয় অনুপাত (%)': entry.ratio,
+        'অ্যাডভাইজার': entry.advisorName,
+        'অ্যাডভাইজার মোবাইল': entry.advisorMobile
+      }));
+
+      const worksheet = XLSX.utils.json_to_sheet(dataForExcel);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Assessments');
+      XLSX.writeFile(workbook, 'GitHub_Financial_History.xlsx');
+
+      statusDiv.innerText = '✅ Excel ডাউনলোড সম্পন্ন!';
+    } catch (error) {
+      statusDiv.innerText = '❌ ত্রুটি: ' + error.message;
+      console.error(error);
+    }
   }
-
-  // ----- PDF এক্সপোর্ট (html2pdf) -----
-  function downloadPDF() {
-    const element = document.getElementById("reportArea");
-    html2pdf().from(element).set({
-      margin: [0.5, 0.5, 0.5, 0.5],
-      filename: "Mohor_Fitness_Report.pdf",
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, letterRendering: true, useCORS: true },
-      jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-    }).save();
-  }
-
-  // ----- পৃষ্ঠা লোড হলে ইতিহাস দেখাও -----
-  window.addEventListener('DOMContentLoaded', loadHistory);
 </script>
 </body>
 </html>
