@@ -11,39 +11,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: List files for debugging
-        run: ls -la
-
-      - name: Find HTML file
-        id: find-html
-        run: |
-          HTML_FILE=$(find . -maxdepth 1 -name "*.html" | head -1)
-          if [ -z "$HTML_FILE" ]; then
-            echo "❌ No HTML file found in root!"
-            exit 1
-          fi
-          echo "html_file=${HTML_FILE}" >> $GITHUB_OUTPUT
-          echo "Found HTML file: ${HTML_FILE}"
-
       - name: Replace token placeholder
         run: |
-          echo "Replacing {{ GH_TOKEN }} in ${{ steps.find-html.outputs.html_file }}"
-          sed -i 's|{{ GH_TOKEN }}|${{ secrets.GH_TOKEN }}|g' ${{ steps.find-html.outputs.html_file }}
+          # আপনার HTML ফাইলের নাম এখানে দিন (যেমন bijoy.html)
+          sed -i 's|{{ GH_TOKEN }}|${{ secrets.GH_TOKEN }}|g' bijoy.html
 
-      - name: Upload artifact (v4)
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: .
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
     permissions:
       pages: write
       id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
