@@ -14,7 +14,7 @@ jobs:
       - name: Replace token placeholder
         run: |
           # আপনার HTML ফাইলের নাম এখানে দিন (যেমন bijoy.html)
-          sed -i 's|{{ GH_TOKEN }}|${{ secrets.GH_TOKEN }}|g' bijoy.html
+          sed -i 's|{{ GH_TOKEN }}|${{ secrets.GH_TOKEN }}|g' index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
