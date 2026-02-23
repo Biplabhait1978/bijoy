@@ -2,22 +2,36 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"]  # আপনার ব্রাঞ্চের নাম দিন
+    branches: ["main"]   # আপনার ব্রাঞ্চ নাম দিন (main বা master)
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: List files for debugging
+        run: ls -la
+
+      - name: Find HTML file
+        id: find-html
+        run: |
+          HTML_FILE=$(find . -maxdepth 1 -name "*.html" | head -1)
+          if [ -z "$HTML_FILE" ]; then
+            echo "❌ No HTML file found in root!"
+            exit 1
+          fi
+          echo "html_file=${HTML_FILE}" >> $GITHUB_OUTPUT
+          echo "Found HTML file: ${HTML_FILE}"
 
       - name: Replace token placeholder
         run: |
-          sed -i "s/{{ GH_TOKEN }}/${{ secrets.GH_TOKEN }}/g" index.html
-        # ধরে নিচ্ছি আপনার HTML ফাইলের নাম index.html
+          echo "Replacing {{ GH_TOKEN }} in ${{ steps.find-html.outputs.html_file }}"
+          sed -i 's|{{ GH_TOKEN }}|${{ secrets.GH_TOKEN }}|g' ${{ steps.find-html.outputs.html_file }}
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: .
 
@@ -33,4 +47,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
