@@ -30,8 +30,8 @@ jobs:
           echo "Replacing {{ GH_TOKEN }} in ${{ steps.find-html.outputs.html_file }}"
           sed -i 's|{{ GH_TOKEN }}|${{ secrets.GH_TOKEN }}|g' ${{ steps.find-html.outputs.html_file }}
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Upload artifact (v4)
+        uses: actions/upload-pages-artifact@v4
         with:
           path: .
 
