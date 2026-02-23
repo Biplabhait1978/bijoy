@@ -45,12 +45,13 @@
   <h2>Financial Fitness Assessment</h2>
 
   <!-- গিটহাব সেটিংস - সম্পূর্ণ লুকানো, কিন্তু মান আগে থেকে সেট করা -->
-  <div class="hidden-settings">
-    <input type="text" id="repoOwner" value="biplabhait1978"> <!-- আপনার GitHub ইউজারনেম দিন -->
-    <input type="text" id="repoName" value="bijoy"> <!-- আপনার রিপোজিটরির নাম দিন -->
-    <input type="text" id="jsonPath" value="assessments.json"> <!-- JSON ফাইলের পাথ -->
-    <input type="password" id="githubToken" value="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"> <!-- আপনার টোকেন দিন -->
-  </div>
+ <!-- গিটহাব সেটিংস - সম্পূর্ণ লুকানো -->
+<div class="hidden-settings">
+    <input type="text" id="repoOwner" value="biplabhait1978">
+    <input type="text" id="repoName" value="bijoy">
+    <input type="text" id="jsonPath" value="assessments.json">
+    <input type="password" id="githubToken" value="{{ GH_TOKEN }}">
+</div>
 
   <div id="reportArea">
     <!-- ক্লায়েন্ট তথ্য -->
